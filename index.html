@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Healthy Recipe Finder</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Nunito',sans-serif;background:#F9F6F0;color:#163A32}
+nav{display:flex;justify-content:space-between;align-items:center;padding:10px 4%;background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-index:50}
+.logo {
+    height: 70%;
+    width: 300px;
+    /* background-color: green; */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.logo img {
+    height: 50px;
+}
+.center-links{position:absolute;left:50%;transform:translateX(-50%);display:flex;gap:32px}
+.center-links a{text-decoration:none;color:#6B8A82;font-size:14px}
+.center-links a.active{color:#163A32;font-weight:700;border-bottom:2px solid #163A32}
+.btn{padding:10px 20px;border-radius:24px;text-decoration:none;font-weight:700;font-size:13px;display:inline-block}
+.btn-dark{background:#163A32;color:#fff}
+.hamburger{display:none;font-size:26px;background:none;border:none;cursor:pointer}
+.mobile-menu{display:none;position:absolute;top:100%;left:0;width:100%;background:#fff;flex-direction:column;padding:16px 4%;box-shadow:0 10px 20px rgba(0,0,0,.1)}
+.mobile-menu.show{display:flex}
+.mobile-menu a{text-decoration:none;color:#333;padding:10px 0;border-bottom:1px solid #f2f2f2}
+.hero{text-align:center;padding:60px 20px 0;max-width:850px;margin:0 auto}
+.hero h1{font-size:45px;font-weight:800;color: #163A32;}
+.highlight{
+    background: linear-gradient(to top, #fbe2c5 50%, transparent 50%);
+    padding: 0 2px;  
+}
+.hero p{color:#6B8A82;font-size:14px;max-width:420px;margin:16px auto 0;line-height:1.6}
+.hero-img{margin:36px auto 0;max-width:700px;border-radius:16px;overflow:hidden}
+.hero-img img{width:100%;height:380px;object-fit:cover;display:block}
+.section{max-width:1100px;margin:0 auto;padding:80px 4% 0}
+.section h2{text-align:center;font-size:28px;margin-bottom:36px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.grid3 b{display:block;margin:10px 0 6px;font-size:14px}
+.grid3 p{font-size:12px;color:#6B8A82;line-height:1.6}
+.built{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-top:80px;padding:0 4%;max-width:1100px;margin:0 auto}
+.built h2{font-size:26px;margin-bottom:14px}
+.built p{font-size:13px;color:#6B8A82;line-height:1.7;margin-bottom:10px}
+.built-img{border-radius:16px;overflow:hidden}
+.built-img img{width:100%;height:340px;object-fit:cover;display:block}
+.cta{margin:80px auto 40px;max-width:1100px;background:#fff;border-radius:16px;padding:40px 20px;text-align:center;border:1px solid #e9e3d8}
+.cta h3{font-size:22px}
+.cta p{font-size:12px;color:#6B8A82;margin:8px 0 16px}
+.spin{position:fixed;bottom:20px;right:18px;background:#163A32;color:#fff;padding:10px 22px;border-radius:24px;border:none;font-weight:700;z-index:99;cursor:pointer}
+@media(max-width:900px){
+.center-links{display:none}
+.hamburger{display:block}
+.hero h1{font-size:30px}
+.grid3{grid-template-columns:1fr}
+.built{grid-template-columns:1fr}
+}
+@media(min-width:901px){
+.hamburger{display:none !important}
+.mobile-menu{display:none !important}
+}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="logo">
+<img src="images/logo.png" alt="leaf logo">
+<span>Healthy Recipe Finder</span>
+</div>
+
+<div class="center-links">
+<a href="index.html" class="active">Home</a>
+<a href="about.html">About</a>
+<a href="recipes.html">Recipes</a>
+</div>
+
+<div style="display:flex;align-items:center;gap:12px">
+<a href="recipes.html" class="btn btn-dark">Browse recipes</a>
+<button class="hamburger" onclick="toggleMenu()">☰</button>
+</div>
+
+<div class="mobile-menu" id="mobileMenu">
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="recipes.html">Recipes</a>
+<a href="recipes.html" class="btn btn-dark" style="text-align:center;margin-top:10px">Browse recipes</a>
+</div>
+</nav>
+
+<div class="hero">
+<h1><span class="highlight">Healthy</span> meals, zero fuss</h1>
+<p>Discover eight quick, whole-food recipes that you can cook tonight — no processed junk, no guesswork.</p>
+<a href="recipes.html" class="btn btn-dark" style="margin-top:20px">Start exploring</a>
+<div class="hero-img"><img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f"></div>
+</div>
+
+<div class="section">
+<h2>What you'll get</h2>
+<div class="grid3">
+<div><span>🥕</span><b>Whole-food recipes</b><p>Each dish uses everyday, unprocessed ingredients.</p></div>
+<div><span>⚡</span><b>Minimum fuss</b><p>All recipes are designed to make eating healthy quick and easy.</p></div>
+<div><span>🔍</span><b>Search in seconds</b><p>Filter by name or ingredient and jump straight to the recipe you need.</p></div>
+</div>
+</div>
+
+<div class="built">
+<div>
+<h2>Built for real life</h2>
+<p>Cooking shouldn't be complicated. These recipes come in under <b><u>30 minutes</u></b> of active time, fit busy schedules, and taste good enough to repeat.</p>
+<p>Whether you're new to the kitchen or just need fresh ideas, we've got you covered.</p>
+</div>
+<div class="built-img"><img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d"></div>
+</div>
+
+<div class="cta">
+<h3>Ready to cook smarter?</h3>
+<p>Hit the button, pick a recipe, and get dinner on the table—fast.</p>
+<a href="recipes.html" class="btn btn-dark">Browse recipes</a>
+</div>
+
+<button class="spin">Spin Coupon</button>
+<script>
+function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('show')}
+</script>
+</body>
+</html>

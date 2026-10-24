@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About - Healthy Recipe Finder</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Nunito+Sans:wght@800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Nunito',sans-serif;background:#F6F5F1;color:#1a1a1a}
+nav{display:flex;justify-content:space-between;align-items:center;padding:20px 6%;background:#fff}
+.logo {
+    height: 70%;
+    width: 300px;
+    /* background-color: green; */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.logo img {
+    height: 50px;
+}
+.btn-green{background:#163a34;color:#fff;padding:12px 24px;border-radius:30px;border:none;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block}
+.about-hero{padding:60px 6%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;background:#fff;border-radius:0 0 40px 40px}
+.about-hero h1{font-family:'Nunito Sans',sans-serif;font-size:56px;line-height:1}
+.about-hero h1 i{font-family:serif;font-style:italic;font-weight:400;color:#163a34}
+.about-hero p{color:#666;line-height:1.7;margin-top:15px}
+.about-hero img{width:100%;height:450px;object-fit:cover;border-radius:20px}
+.stats{padding:60px 6%;display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.stat-box{background:#fff;padding:30px;border-radius:20px;text-align:center;box-shadow:0 5px 20px rgba(0,0,0,.04)}
+.stat-box h2{font-family:'Nunito Sans',sans-serif;font-size:40px;color:#163a34}
+.stat-box p{color:#666;margin-top:5px}
+.mission{margin:20px 6%;background:#163a34;color:#fff;border-radius:30px;padding:60px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.mission h2{font-family:'Nunito Sans',sans-serif;font-size:42px;line-height:1.1}
+.mission p{color:#c2d6d2;line-height:1.7;margin-top:15px}
+footer{padding:30px 6%;display:flex;justify-content:space-between;color:#777;font-size:14px;background:#fff;margin-top:40px}
+@media(max-width:800px){.about-hero,.mission,.stats{grid-template-columns:1fr}.about-hero h1{font-size:36px}.mission h2{font-size:32px}}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="logo">
+    <img src="images/logo.png" alt="leaf logo"> Healthy Recipe Finder
+</div>
+<div style="display:flex;gap:10px">
+<a href="index.html" style="text-decoration:none;color:#333;padding:12px 18px;font-weight:600">Home</a>
+<a href="recipes.html" style="text-decoration:none;color:#333;padding:12px 18px;font-weight:600">Recipes</a>
+<a href="about.html" class="btn-green">About</a>
+</div>
+</nav>
+
+<div class="about-hero">
+<div>
+<h1>We believe <i>healthy</i> should be simple</h1>
+<p>This website was built as part of my IT (Industrial Training) program. The goal is to demonstrate real-world frontend skills: responsive design, search, filtering, and dynamic content — similar to the Frontend Mentor Recipe Finder challenge.</p>
+<p><b>What I built:</b> Home page, Recipes page with search by name/ingredient, filter by cooking time and category, and a dynamic detail view — all without a backend.</p>
+<br>
+<a href="recipes.html" class="btn-green">Explore Recipes</a>
+</div>
+<img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061" alt="healthy food">
+</div>
+
+<div class="stats">
+<div class="stat-box"><h2>6+</h2><p>Healthy Recipes</p></div>
+<div class="stat-box"><h2>30m</h2><p>Average Cook Time</p></div>
+<div class="stat-box"><h2>100%</h2><p>Whole-food Ingredients</p></div>
+</div>
+
+<div class="mission">
+<div>
+<h2>Built for real life, not just for marks</h2>
+<p>Cooking shouldn't be complicated. Every recipe in this project is under 60 minutes, uses everyday ingredients you can find in Port Harcourt, and tastes good enough to repeat.</p>
+<p>For my IT report, I implemented: HTML5 semantic structure, CSS Grid & Flexbox, JavaScript filtering with Array.filter() and includes(), and detail page rendering with JavaScript.</p>
+</div>
+<div style="background:#1e4a43;padding:30px;border-radius:20px">
+<h3 style="margin-bottom:15px">Project Stack</h3>
+<p>• HTML, CSS, JavaScript (Vanilla)<br>• No frameworks — pure JS<br>• Responsive (Mobile, Tablet, Desktop)<br>• Hosted on GitHub Pages / Netlify ready<br>• Original design inspired by Frontend Mentor</p>
+<br>
+<a href="index.html" style="background:#fff;color:#163a34;padding:12px 24px;border-radius:30px;text-decoration:none;font-weight:700;display:inline-block">Back to Home</a>
+</div>
+</div>
+
+<footer><p>Built for IT Program — 2026</p><p>Healthy Recipe Finder</p></footer>
+
+</body>
+</html>

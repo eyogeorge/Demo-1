@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recipes - Healthy Recipe Finder</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Nunito+Sans:wght@800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Nunito',sans-serif;background:#F6F5F1;color:#1a1a1a}
+nav{display:flex;justify-content:space-between;align-items:center;padding:20px 6%;background:#fff}
+.logo {
+    height: 30%;
+    width: 100px;
+    /* background-color: green; */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.logo img {
+    height: 50px;
+}
+.btn-green{background:#163a34;color:#fff;padding:12px 24px;border-radius:30px;border:none;font-weight:700;cursor:pointer;text-decoration:none}
+.search-section{padding:40px 6% 20px}
+.search-section h1{font-family:'Nunito Sans',sans-serif;font-size:48px}
+.search-box{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;background:#fff;padding:12px;border-radius:16px;box-shadow:0 5px 20px rgba(0,0,0,.04)}
+.search-box input, .search-box select{flex:1;padding:14px 18px;border:1px solid #eee;border-radius:12px;outline:none;font-size:15px;min-width:180px}
+.grid{padding:20px 6% 80px;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
+.card{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 5px 20px rgba(0,0,0,.04);transition:.2s}
+.card:hover{transform:translateY(-4px)}
+.card img{width:100%;height:200px;object-fit:cover}
+.card-body{padding:18px}
+.card-body h3{font-size:18px;margin-bottom:8px;font-weight:700}
+.meta{display:flex;gap:12px;color:#777;font-size:13px;margin-bottom:10px}
+.tag{background:#E8F5E9;color:#163a34;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:700;display:inline-block}
+.view-btn{margin-top:12px;width:100%;padding:12px;border:1px solid #163a34;border-radius:30px;background:#fff;color:#163a34;font-weight:700;cursor:pointer}
+.view-btn:hover{background:#163a34;color:#fff}
+#detailPage{display:none;padding:40px 6%;background:#fff;min-height:100vh}
+#detailPage.active{display:block}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px}
+.detail-grid img{width:100%;height:450px;object-fit:cover;border-radius:20px}
+@media(max-width:800px){.detail-grid{grid-template-columns:1fr}.search-section h1{font-size:32px}}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="logo">
+<img src="images/logo.png" alt="leaf logo"> </div>
+<a href="index.html" class="btn-green">Home</a>
+</nav>
+
+<!-- LIST PAGE -->
+<div id="listPage">
+<div class="search-section">
+<h1>Explore our simple,<br>healthy recipes</h1>
+<p style="color:#666;margin-top:10px">Find a meal that fits your life</p>
+<div class="search-box">
+<input id="searchInput" placeholder="Search by name or ingredient e.g. salmon" oninput="filterRecipes()">
+<select id="timeFilter" onchange="filterRecipes()">
+<option value="">Any cooking time</option>
+<option value="5">under 5 mins</option>
+<option value="15">Under 15 mins</option>
+<option value="30">Under 30 mins</option>
+<option value="60">Under 60 mins</option>
+</select>
+<select id="catFilter" onchange="filterRecipes()">
+<option value="">All categories</option>
+<option value="Fish">Fish</option>
+<option value="Chicken">Chicken</option>
+<option value="Salad">Salad</option>
+<option value="Breakfast">Breakfast</option>
+<option value="lunch">Lunch</option>
+<option value="Dinner">Dinner</option>
+</select>
+</div>
+</div>
+<div id="recipeGrid" class="grid"></div>
+</div>
+
+<!-- DETAIL PAGE (hidden at first) -->
+<div id="detailPage">
+<button onclick="showList()" class="btn-green" style="margin-bottom:20px">← Back to recipes</button>
+<div id="detailContent" class="detail-grid"></div>
+</div>
+
+<script>
+const recipes = [
+{id:1,title:"Pan-Seared Salmon with Greens",img:"https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2",prep:10,cook:15,cat:"Fish",ingredients:["Salmon fillet","Green beans","Lime","Olive oil","Garlic"],instruction:"Season salmon with salt. Sear in hot pan 4 mins per side. Blanch green beans, toss with garlic and lime. Serve together."},
+{id:2,title:"Avocado Toast with Tomatoes",img:"https://images.unsplash.com/photo-1541519227354-08fa5d50c44d",prep:5,cook:5,cat:"Breakfast",ingredients:["Bread","Avocado","Cherry tomatoes","Lemon","Chili flakes"],instruction:"Toast bread, mash avocado with lemon, top with tomatoes and chili."},
+{id:3,title:"Mediterranean Chickpea Salad",img:"https://images.unsplash.com/photo-1540420773420-3366772f4999",prep:15,cook:0,cat:"Salad",ingredients:["Chickpeas","Cucumber","Tomatoes","Feta","Olives"],instruction:"Mix all ingredients with olive oil and lemon dressing. Chill 10 mins."},
+{id:4,title:"Berry & Nut Oatmeal Bowl",img:"https://images.unsplash.com/photo-1505252585461-04db1eb84625",prep:5,cook:10,cat:"Breakfast",ingredients:["Oats","Milk","Blueberries","Strawberries","Almonds"],instruction:"Cook oats with milk, top with berries and nuts, drizzle honey."},
+{id:5,title:"Lemon Herb Chicken",img:"https://images.unsplash.com/photo-1532550907401-a500c9a57435",prep:15,cook:25,cat:"Chicken",ingredients:["Chicken breast","Lemon","Herbs","Garlic","Olive oil"],instruction:"Marinate chicken 15 mins, bake 25 mins at 200°C until golden."},
+{id:6,title:"Quinoa Veggie Power Bowl",img:"https://images.unsplash.com/photo-1512621776952-a57141f2eefd",prep:15,cook:20,cat:"Salad",ingredients:["Quinoa","Avocado","Spinach","Corn","Peppers"],instruction:"Cook quinoa, roast veggies, combine in bowl with dressing."}
+];
+
+function render(list){
+document.getElementById('recipeGrid').innerHTML = list.map(r=>`
+<div class="card">
+<img src="${r.img}">
+<div class="card-body">
+<span class="tag">${r.cat} • ${r.prep+r.cook} mins</span>
+<h3>${r.title}</h3>
+<div class="meta"><span>Prep: ${r.prep}m</span><span>Cook: ${r.cook}m</span></div>
+<button class="view-btn" onclick="showDetail(${r.id})">View Recipe</button>
+</div>
+</div>`).join('');
+}
+
+function filterRecipes(){
+let q = document.getElementById('searchInput').value.toLowerCase();
+let time = document.getElementById('timeFilter').value;
+let cat = document.getElementById('catFilter').value;
+let filtered = recipes.filter(r=>{
+let matchText = r.title.toLowerCase().includes(q) || r.ingredients.join(' ').toLowerCase().includes(q);
+let matchTime = time ? (r.prep+r.cook) <= parseInt(time) : true;
+let matchCat = cat ? r.cat === cat : true;
+return matchText && matchTime && matchCat;
+});
+render(filtered);
+}
+
+function showDetail(id){
+let r = recipes.find(x=>x.id===id);
+document.getElementById('listPage').style.display='none';
+let d = document.getElementById('detailPage');
+d.classList.add('active');
+d.style.display='block';
+document.getElementById('detailContent').innerHTML=`
+<img src="${r.img}">
+<div>
+<span class="tag">${r.cat}</span>
+<h1 style="font-family:'Nunito Sans',sans-serif;font-size:40px;margin:15px 0">${r.title}</h1>
+<div class="meta"><span>Prep: ${r.prep}m</span><span>Cook: ${r.cook}m</span><span>Total: ${r.prep+r.cook}m</span></div>
+<h3 style="margin-top:25px">Ingredients</h3>
+<ul style="margin:10px 0 20px 20px;line-height:2">${r.ingredients.map(i=>`<li>${i}</li>`).join('')}</ul>
+<h3>Instructions</h3>
+<p style="margin-top:10px;color:#555;line-height:1.7">${r.instruction}</p>
+</div>`;
+window.scrollTo(0,0);
+}
+
+function showList(){
+document.getElementById('detailPage').classList.remove('active');
+document.getElementById('detailPage').style.display='none';
+document.getElementById('listPage').style.display='block';
+}
+render(recipes);
+</script>
+</body>
+</html>
